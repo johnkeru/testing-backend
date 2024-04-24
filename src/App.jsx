@@ -7,9 +7,11 @@ const App = () => {
     const [token, setToken] = useState('');
     const [user, setUser] = useState(null);
 
+    const host = VITE_PRODUCTION_HOST || 'http://localhost:8000'
+
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/login', {
+            const response = await axios.post(host + '/login', {
                 email,
                 password,
             },);
@@ -27,7 +29,7 @@ const App = () => {
 
     const fetchUser = async (token) => {
         try {
-            const response = await axios.get('http://localhost:8000/api/user', {
+            const response = await axios.get(host + '/api/user', {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },
