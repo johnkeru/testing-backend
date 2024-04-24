@@ -7,7 +7,7 @@ const App = () => {
     const [token, setToken] = useState('');
     const [user, setUser] = useState(null);
 
-    const host = VITE_PRODUCTION_HOST || 'http://localhost:8000'
+    const host = import.meta.env.VITE_PRODUCTION_HOST || 'http://localhost:8000'
 
     const handleLogin = async () => {
         try {
