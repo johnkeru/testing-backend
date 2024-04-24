@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const App = () => {
+    const host = import.meta.env.VITE_PRODUCTION_HOST || 'http://localhost:8000'
+
+    useEffect(() => {
+        axios.get(host + '/api/hi').then(console.log)
+    }, [])
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [token, setToken] = useState('');
     const [user, setUser] = useState(null);
 
-    const host = import.meta.env.VITE_PRODUCTION_HOST || 'http://localhost:8000'
 
     const handleLogin = async () => {
         try {
@@ -44,7 +49,6 @@ const App = () => {
             console.error('Error:', error);
         }
     };
-
     return (
         <div>
             <h1>Login</h1>
@@ -65,7 +69,7 @@ const App = () => {
             {user && (
                 <div>
                     <h2>User Details</h2>
-                    <p>Email: {user.email}</p>
+                    <p>Email: {user.data.email}</p>
                     {/* Render other user details as needed */}
                 </div>
             )}
